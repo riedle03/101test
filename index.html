@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!--
+  This is a single-file HTML infographic generated based on a student collaborative research report.
+  It summarizes key research content, methodology, core findings, and conclusions.
+  All CSS and JavaScript are embedded within this HTML file.
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>생성형 AI의 장단점과 보완 방안 보고서 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <style>
+        /* Custom CSS for Infographic */
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F4F7F9; /* Light Background */
+            color: #263238; /* Dark Text */
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: #2A62B6; /* Primary Blue */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .card {
+            background-color: #FFFFFF; /* Light Background (Card) */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #2A62B6; /* Primary Blue */
+        }
+
+        .subsection-title {
+            font-size: 1.5rem; /* text-2xl */
+            margin-bottom: 1rem;
+            color: #4ECDC4; /* Secondary Teal */
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Adjusted max-width for charts */
+            height: 350px; /* Default height */
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; /* md:h-80 */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .chart-container {
+                height: 450px; /* lg:h-96 */
+            }
+        }
+
+        /* Specific styles for lists/diagrams */
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .list-icon {
+            flex-shrink: 0;
+            margin-right: 0.75rem;
+            font-weight: bold;
+            color: #2A62B6;
+            font-size: 1.25rem;
+        }
+
+        .interview-card {
+            background-color: #E0F2FE; /* Supporting Light Blue */
+            border-left: 4px solid #2A62B6; /* Primary Blue */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pros-cons-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .pros-cons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .pro-item, .con-item {
+            background-color: #FFFFFF;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #A9A9A9; /* Accent Grey */
+        }
+
+        .pro-item {
+            border-left: 4px solid #4ECDC4; /* Secondary Teal */
+        }
+
+        .con-item {
+            border-left: 4px solid #2A62B6; /* Primary Blue */
+        }
+
+        .solution-item {
+            background-color: #FFFFFF;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+            border: 1px solid #E0F2FE;
+        }
+
+        .solution-item h4 {
+            color: #2A62B6;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-item p {
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-gradient-to-r from-[#2A62B6] to-[#4ECDC4] text-white py-8 px-4 rounded-b-xl shadow-lg">
+        <div class="container text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-2 leading-tight">생성형 AI의 장단점은 무엇이며, 단점을 어떻게 보완할 수 있을까?</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">미림마이스터고등학교 뉴 미디어 소프트웨어과 1-1반 학생들의 생성형 AI 사용 실태 보고서</p>
+            <p class="text-sm mt-4 opacity-80">작성일: 2025년 5월 26일</p>
+        </div>
+    </header>
+
+    <main class="container py-8">
+        <section class="card">
+            <h2 class="section-title">조사 동기와 목적</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                생성형 인공지능(AI)은 현대 사회의 다양한 분야에서 혁신적인 변화를 이끌고 있으며, 학생들의 학습 환경에도 큰 영향을 미치고 있다. 일상에서 생성형 AI를 활용하는 과정에서 그 장점을 충분히 활용하지 못하거나, 단점을 명확히 인지하지 못하여 불편함을 경험하는 사례가 관찰되었다. 이에 본 조사는 학생들이 실제로 경험하는 생성형 AI 사용의 장점과 단점을 구체적으로 파악하고, 발견된 단점을 효과적으로 보완할 수 있는 방안을 모색하는 것을 목적으로 한다.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">조사 계획</h2>
+            <div class="grid md:grid-cols-3 gap-6 text-gray-700">
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm border border-blue-200">
+                    <h3 class="subsection-title mb-2">조사 기간</h3>
+                    <p>본 조사는 2024년 5월 13일부터 5월 26일까지 진행했다.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm border border-blue-200">
+                    <h3 class="subsection-title mb-2">조사 대상</h3>
+                    <p>본 조사는 미림마이스터고등학교 뉴미디어소프트웨어과 1학년 1반 학생 19명 전원을 대상으로 실시했다.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm border border-blue-200">
+                    <h3 class="subsection-title mb-2">조사 내용</h3>
+                    <p>본 조사는 생성형 AI 사용 빈도, 활용 목적, 장점과 단점에 대한 인식, 단점 보완 방안에 대한 의견을 수집하기 위해 설문조사와 심층 인터뷰를 병행했다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">조사 결과</h2>
+
+            <h3 class="subsection-title mb-4">가. 설문조사 결과</h3>
+
+            <h4 class="text-xl font-semibold mb-3 text-center text-[#2A62B6]">설문 결과 1: 생성형 AI 사용으로 인한 사고력 저하 우려 인식</h4>
+            <p class="text-center text-gray-600 mb-6">생성형 AI를 사용할수록 스스로 생각하거나 문제를 해결하려는 노력이 줄어드는 것 같다는 의견에 대한 학생들의 인식도이다.</p>
+            <div class="chart-container">
+                <canvas id="surveyResult1Chart"></canvas>
+            </div>
+
+            <h4 class="text-xl font-semibold mt-8 mb-3 text-center text-[#2A62B6]">설문 결과 2: 생성형 AI의 전반적인 유용성 또는 만족도 인식</h4>
+            <p class="text-center text-gray-600 mb-6">생성형 AI의 전반적인 유용성 또는 만족도에 대한 학생들의 인식도이다.</p>
+            <div class="chart-container">
+                <canvas id="surveyResult2Chart"></canvas>
+            </div>
+
+            <h4 class="text-xl font-semibold mt-8 mb-3 text-center text-[#2A62B6]">설문 결과 3: 생성형 AI 사용 시 겪는 주요 단점</h4>
+            <p class="text-center text-gray-600 mb-6">생성형 AI 사용 시 학생들이 겪는 가장 큰 불편함이나 걱정거리에 대한 응답 결과이다.</p>
+            <div class="chart-container">
+                <canvas id="surveyResult3Chart"></canvas>
+            </div>
+
+            <h3 class="subsection-title mt-12 mb-4">나. 인터뷰 결과</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="interview-card">
+                    <h4 class="font-bold text-lg mb-2">인터뷰 인물: 김진영 학생</h4>
+                    <p class="text-gray-700">과제 시 챗GPT를 사용해 보았으며, 어려운 질문에도 잘 이해하고 잘 답변해줘서 도움이 됐다고 한다. 다만, 정보의 정확성이 항상 걱정되어 사실 여부를 교차 확인하는 과정이 필요하다고 말했다. 또한, 향후 AI가 제공하는 정보의 출처를 명확히 제시하고, 사실 검증 기능이 강화되면 좋겠다는 의견을 제시했다.</p>
+                </div>
+                <div class="interview-card">
+                    <h4 class="font-bold text-lg mb-2">인터뷰 인물: 강태인 학생</h4>
+                    <p class="text-gray-700">생성형 AI가 거짓 정보를 제공할 수 있기 때문에, 사용자가 스스로 사실 여부를 판단할 수 있는 능력이 중요하다고 생각한다. AI가 거짓말을 하는 건 보상 체계 때문일 수 있다고 보고, 이상하다고 느낀 정보는 직접 인터넷에 검색해 확인한 적도 있다고 하였다.</p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title mt-12 mb-4">다. 생성형 AI의 장단점</h3>
+            <div class="pros-cons-grid">
+                <div class="pro-item">
+                    <h4 class="font-bold text-lg mb-2 text-[#4ECDC4]">장점</h4>
+                    <ul class="list-disc pl-5 text-gray-700">
+                        <li>어려운 질문에 대한 답변</li>
+                        <li>빠른 시간 내 다양한 결과물 생성</li>
+                        <li>과제 수행 및 학습 보조 기능</li>
+                    </ul>
+                </div>
+                <div class="con-item">
+                    <h4 class="font-bold text-lg mb-2 text-[#2A62B6]">단점</h4>
+                    <ul class="list-disc pl-5 text-gray-700">
+                        <li>스스로 생각하거나 문제 해결 능력 저하</li>
+                        <li>정보의 정확성 및 신뢰성 부족</li>
+                        <li>표절 및 저작권 침해 가능성</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">특히, '스스로 생각하거나 문제를 해결하려는 노력이 줄어드는 것 같다'는 설문에 '그렇다'가 73.7%를 차지하여 가장 큰 단점으로 나타났다.</p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title mt-12 mb-4">라. 단점을 보완할 수 있는 방법</h3>
+            <p class="text-lg text-gray-700 mb-6">설문과 인터뷰를 통해 인지한 생성형 AI의 주요 단점은 '생성형 AI를 사용할수록 스스로 생각하거나 문제를 해결하려는 능력이 줄어든다'는 점이다. 이를 보완하기 위한 구체적인 방법은 다음과 같다.</p>
+            <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
+                <div class="solution-item">
+                    <h4 class="font-bold text-xl mb-2">1. AI 활용 교육 강화</h4>
+                    <p class="text-gray-700">AI를 도구로 활용하되, 비판적 사고와 창의적 문제 해결 능력을 동시에 기를 수 있는 교육이 필요하다. 학교 및 기업에서는 AI의 원리와 한계를 이해하고, AI의 결과물을 검토하고 평가하는 능력을 키우는 교육 프로그램을 도입해야 한다.</p>
+                </div>
+                <div class="solution-item">
+                    <h4 class="font-bold text-xl mb-2">2. 설명 가능한 AI 중요성 인식</h4>
+                    <p class="text-gray-700">AI의 결정 과정을 볼 수 있는 설명 가능한 AI 시스템의 중요성을 인지하고, 사용자가 직접 AI의 판단 과정을 이해하고 자신의 판단과 비교할 수 있도록 해야 한다. 이는 사용자의 사고 능력을 유지하고 강화하는 데 도움이 될 것이다.</p>
+                </div>
+                <div class="solution-item">
+                    <h4 class="font-bold text-xl mb-2">3. AI 답변 재검토 습관화</h4>
+                    <p class="text-gray-700">생성형 AI의 응답을 그대로 받아들이지 않고, 이 답이 맞는지 다른 관점도 찾아보자, 왜 이렇게 답변했을까?와 같은 자기 질문을 하며, 출처 확인, 비판적 질문 제기 등을 습관화한다. 그럼으로써 사용자는 AI의 답변을 토대로 더욱 정확한 정보를 얻을 수 있을 것이다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">결론 및 제언</h2>
+
+            <h3 class="subsection-title mb-4">가. 조사 결과 종합 및 주요 발견점</h3>
+            <ul class="list-disc pl-6 text-gray-700 space-y-3">
+                <li>
+                    <span class="font-semibold text-[#2A62B6]">첫째,</span> 조사 대상 학생 대다수는 생성형 AI를 학습 및 과제 수행에 유용한 도구로 인식하고 적극적으로 활용하고 있다. 이는 학생들이 생성형 AI의 편리성과 정보 접근성을 긍정적으로 평가하고 있음을 보여준다.
+                </li>
+                <li>
+                    <span class="font-semibold text-[#2A62B6]">둘째,</span> 생성형 AI 사용의 가장 큰 우려 사항으로는 스스로 생각하고 학습하는 능력 저하와 생성된 정보의 정확성 및 신뢰성 부족이 지적되었다. 특히 많은 학생이 AI가 제공하는 답변의 신뢰성 문제와 이를 검증하는 과정의 어려움에 대해 깊이 우려하고 있는 것으로 나타나고 있다. 이는 AI의 편리함에 대한 의존도 증가와 함께 정보 판별 능력의 중요성이 더욱 강조되어야 함을 보여준다.
+                </li>
+            </ul>
+
+            <h3 class="subsection-title mt-8 mb-4">나. 조사를 통해 새롭게 알게 된 점 및 느낀 점</h3>
+            <ul class="list-disc pl-6 text-gray-700 space-y-3">
+                <li>생성형 AI가 단순한 정보 제공 도구를 넘어서 학습 보조 도구로 활용될 수 있다는 점을 깨달았다. 예를 들어, 복잡한 개념을 쉽게 설명받거나 글쓰기나 요약 활동에 도움 받을 수 있었다.</li>
+                <li>AI를 사용할 때는 단순히 결과만 받아들이기보다는 비판적으로 사고하고 그 결과가 신뢰할 만한지 검토하는 자세가 필요하다는 것도 느꼈다. 이를 통해 AI를 더욱 책임감 있게 활용할 수 있다는 점에서 인상 깊었다.</li>
+            </ul>
+
+            <h3 class="subsection-title mt-8 mb-4">다. 제언</h3>
+            <ul class="list-disc pl-6 text-gray-700 space-y-3">
+                <li>생성형 AI만 믿고 해답을 구하려는 것보단 생성형 AI의 활용도를 정확히 이해하고 비판적으로도 활용할 수 있는 능력을 길러야 한다.</li>
+                <li>이런 행동을 기르기 위해서는 생성형 AI가 제공하는 정보나 결과물을 분석하고 오류나 편향이 있는지 검토하는 활동을 통해 비판적으로 볼 수 있는 능력을 기를 수 있다.</li>
+                <li>또한 AI 사용 과정에서 발생할 수 있는 윤리적 쟁점에 대해 토론함으로써 책임 있는 사용자로서의 태도도 기를 수 있다.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">참고자료</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><a href="https://www.samsungsds.com/kr/insights/explainable_ai.html" target="_blank" class="text-[#2A62B6] hover:underline">설명 가능한 AI (Samsung SDS)</a></li>
+                <li><a href="https://www.itworld.co.kr/article/3992858/%EA%B5%AC%EA%B8%80-%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%EC%9D%98-%EB%8C%80%EB%8B%A8%ED%95%9C-%EC%86%8D%EC%9E%84%EC%88%98.html" target="_blank" class="text-[#2A62B6] hover:underline">AI의 정확하지 않은 답변 근거 (ITWorld)</a></li>
+                <li><a href="https://docs.google.com/forms/d/1IeeMz91s5POEVoaxYiCNvIqoDrzAoG3NDtJMNQ9q68U/edit?hl=ko&pli=1" target="_blank" class="text-[#2A62B6] hover:underline">설문조사 결과 링크 (Google Forms)</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="bg-[#263238] text-white py-6 px-4 text-center rounded-t-xl shadow-lg">
+        <div class="container">
+            <p>&copy; 2025 미림마이스터고등학교 뉴 미디어 소프트웨어과 1-1반</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Chart.js and other dynamic functionalities
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to wrap labels for Chart.js
+            function wrapLabel(label, maxCharsPerLine) {
+                const words = label.split(' ');
+                let currentLine = '';
+                let result = [];
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    if ((currentLine + word).length > maxCharsPerLine && currentLine !== '') {
+                        result.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                }
+                result.push(currentLine.trim());
+                return result;
+            }
+
+            // Custom tooltip for Chart.js
+            const customTooltip = {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed !== null) {
+                            label += context.parsed + '%';
+                        }
+                        return label;
+                    }
+                }
+            };
+
+            // Data for Survey Result 1
+            const surveyResult1Data = {
+                labels: ['전혀 아니다', '아니다', '보통이다', '그렇다', '매우 그렇다'],
+                data: [10.5, 0, 15.8, 47.4, 26.3],
+                backgroundColors: ['#A9A9A9', '#E0F2FE', '#4ECDC4', '#2A62B6', '#1A4D9B'],
+                borderColors: ['#FFFFFF']
+            };
+
+            // Chart for Survey Result 1 (Pie Chart)
+            const ctx1 = document.getElementById('surveyResult1Chart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: surveyResult1Data.labels.map(label => wrapLabel(label, 16)),
+                    datasets: [{
+                        data: surveyResult1Data.data,
+                        backgroundColor: surveyResult1Data.backgroundColors,
+                        borderColor: surveyResult1Data.borderColors,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: customTooltip
+                    }
+                }
+            });
+
+            // Data for Survey Result 2
+            const surveyResult2Data = {
+                labels: ['전혀 아니다', '아니다', '보통이다', '그렇다', '매우 그렇다'],
+                data: [10.5, 26.3, 26.3, 15.8, 21.1],
+                backgroundColors: ['#A9A9A9', '#E0F2FE', '#4ECDC4', '#2A62B6', '#1A4D9B'],
+                borderColors: ['#FFFFFF']
+            };
+
+            // Chart for Survey Result 2 (Bar Chart)
+            const ctx2 = document.getElementById('surveyResult2Chart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: surveyResult2Data.labels.map(label => wrapLabel(label, 16)),
+                    datasets: [{
+                        label: '응답 비율 (%)',
+                        data: surveyResult2Data.data,
+                        backgroundColor: surveyResult2Data.backgroundColors,
+                        borderColor: surveyResult2Data.backgroundColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Make it a horizontal bar chart
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: customTooltip
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Data for Survey Result 3 (Recalculated percentages based on 19 students)
+            const surveyResult3Data = {
+                labels: [
+                    '생성된 정보의 정확성 및 신뢰성 부족',
+                    '과제 결과물의 표절 또는 저작권 문제',
+                    '스스로 생각하고 학습하는 능력 저하',
+                    '개인정보 유출에 대한 불안감',
+                    '별로 불편하거나 걱정되지 않았다'
+                ],
+                counts: [6, 3, 8, 2, 0],
+                totalStudents: 19
+            };
+
+            const surveyResult3Percentages = surveyResult3Data.counts.map(count =>
+                ((count / surveyResult3Data.totalStudents) * 100).toFixed(1)
+            );
+
+            // Chart for Survey Result 3 (Bar Chart)
+            const ctx3 = document.getElementById('surveyResult3Chart').getContext('2d');
+            new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: surveyResult3Data.labels.map(label => wrapLabel(label, 16)),
+                    datasets: [{
+                        label: '응답 학생 수',
+                        data: surveyResult3Data.counts,
+                        backgroundColor: ['#2A62B6', '#4ECDC4', '#2A62B6', '#A9A9A9', '#E0F2FE'],
+                        borderColor: ['#2A62B6', '#4ECDC4', '#2A62B6', '#A9A9A9', '#E0F2FE'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '명';
+                                        label += ' (' + surveyResult3Percentages[context.dataIndex] + '%)';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <!--
+      인포그래픽 생성이 완료되었습니다.
+      이 HTML 파일은 학생 보고서의 주요 내용을 시각적으로 요약하며,
+      모든 데이터와 텍스트는 원본 보고서에서 추출되었습니다.
+      반응형 디자인과 Chart.js를 활용한 통계 시각화를 적용했습니다.
+    -->
+</body>
+</html>
